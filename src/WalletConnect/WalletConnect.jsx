@@ -1,7 +1,9 @@
 import React , {useState , useEffect} from 'react'
+import { ContractInstance, signer, signMessage } from "./config";
 
+import { ethers } from "ethers";
 import * as Styled from "./style"
-// import BigNumber
+import BigNumber from 'bignumber.js';
 
 const WalletConnect = () => {
     const { ethereum } = window;
@@ -16,9 +18,21 @@ const WalletConnect = () => {
     //     console.log("value",value)
     //    })
     // })
+
+
+  useEffect(()=> {
+    calcualteEquaction()
+  },[])
    
 
-   
+  const calcualteEquaction = () => {
+   let x = new BigNumber(2)
+   let y = new BigNumber(3)
+    y  = (y.plus(3)).times(2)
+    console.log("result " , y)
+  }
+
+
     useEffect(() => {
         if (localStorage.getItem("address")) {
           handleAccountChange(localStorage.getItem("address"));
@@ -94,6 +108,8 @@ const WalletConnect = () => {
                   }
                 }
               }
+
+              await signMessage("hey there")
         }else if(!window.ethereum){
             alert("MetaMask Not Installed")
         }
